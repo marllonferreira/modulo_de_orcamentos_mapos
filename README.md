@@ -5,29 +5,58 @@
 ![License](https://img.shields.io/badge/license-MIT-orange?style=flat-square)
 ![Status](https://img.shields.io/badge/status-active-success?style=flat-square)
 
-Este é um módulo avançado de gestão de orçamentos projetado para funcionar de forma **independente** dentro do ecossistema Mapos.
+Este é um módulo de gestão de orçamentos projetado para funcionar de forma **independente** dentro do ecossistema Mapos.
 
 ### 🛡️ Principais Diferenciais
 - **Blindado contra Atualizações:** Por residir em uma pasta separada (`/modulos`), você pode atualizar o núcleo do Mapos tranquilamente; este módulo **não será sobrescrito ou afetado**.
-- **Design Moderno:** Interface otimizada e responsiva, inspirada nos padrões mais recentes.
-- **Motor de Cálculo Avançado:** Realiza cálculos automáticos em tempo real, com suporte nativo a **Taxas/Comissões (%)** por item e geração de PDF profissional.
+- **Design & Experiência:**
+    - **Interface Moderna:** Visual otimizado e responsivo, inspirado nos padrões mais recentes.
+    - **Temas Independentes:** Sistema próprio de temas, isolado para garantir estabilidade visual.
+    - **Mobile First:** Tabelas e layouts ajustados para visualização perfeita em celulares e tablets.
+- **Motor de Cálculo Avançado:** Realiza cálculos automáticos em tempo real, com suporte nativo a **Taxas/Comissões (%)** por item.
+- **Gestão Completa de Orçamentos:**
+    - **Múltiplos Status:** Controle total do fluxo (Rascunho, Aguardando Aprovação, Em Revisão, Aprovado, Emitido, Cancelado, etc).
+    - **Impressão Profissional:** Geração de orçamentos e relatórios em PDF (via mPDF) limpos e organizados, com layout profissional, cabeçalho e tabelas zebradas.
+    - **Validade:** Campo informativo para definir a validade da proposta em dias.
+    - **Notificações:** Alerta visual para orçamentos que atingiram a data limite de validade.
+- **Relatórios Avançados:** Filtros por data, cliente e status, estatísticas e geração de PDF.
 - **Inteligência Artificial:** Integração nativa com **Google Gemini** para sugestão inteligente de preços de mercado.
 - **Integração Total:** Apesar de independente nos arquivos, ele lê e grava diretamente no banco de dados oficial do Mapos (clientes, produtos, serviços), garantindo integridade dos dados.
-- **Otimizado para Dispositivos Móveis:** Layout responsivo e tabelas ajustadas para visualização perfeita em qualquer tamanho de tela (celulares e tablets).
+- **Segurança Reforçada:** Proteção nativa contra XSS (Sanitização no Frontend) e CSRF (Tokens Backend), garantindo que apenas usuários autenticados e via formulários legítimos possam interagir com o sistema.
 
 
 ### 🖼️ Screenshots (Algumas telas do sistema)
 
-#### Dashboard (Tela Inicial com Resumo)
+#### Dashboard (Tela Inicial com graficos)
 <img src="Screenshots/01.PNG" width="100%" alt="Dashboard" />
 <br><br>
 
-#### Detalhes do Orçamento
-<img src="Screenshots/02.PNG" width="100%" alt="Detalhes do Orçamento" />
+#### Dashboard (Tela Inicial com ultimos orçamentos)
+<img src="Screenshots/02.PNG" width="100%" alt="Dashboard" />
 <br><br>
 
+#### Lista de Orçamentos
+<img src="Screenshots/03.PNG" width="100%" alt="Lista de Orçamentos" />
+<br><br>
+
+#### detalhes do orçamento
+<img src="Screenshots/04.PNG" width="100%" alt="Detalhes do Orçamento" />
+<br>
+
+#### detalhes do orçamento part2
+<img src="Screenshots/05.PNG" width="100%" alt="Detalhes do Orçamento part2" />
+<br>
+
+#### Edição
+<img src="Screenshots/06.PNG" width="100%" alt="Edição" />
+<br>
+
 #### Edição com Inteligência Artificial
-<img src="Screenshots/03.PNG" width="100%" alt="Edição com IA" />
+<img src="Screenshots/07.PNG" width="100%" alt="Edição com IA" />
+<br>
+
+#### Relatórios
+<img src="Screenshots/08.PNG" width="100%" alt="Relatórios" />
 <br>
 
 ---
@@ -44,7 +73,13 @@ Este é um módulo avançado de gestão de orçamentos projetado para funcionar 
 
 ## 🚀 Instalação e Acesso
 
-### 1. Instalação
+### 0. Pré-requisito: Instale o Mapos
+Antes de instalar este módulo, você precisa ter o **Mapos** rodando. Se ainda não tem:
+1.  Baixe o Mapos oficial em [github.com/RamonSilva20/mapos](https://github.com/RamonSilva20/mapos).
+2.  Siga o tutorial de instalação oficial do Mapos.
+3.  Com o Mapos funcionado, prossiga abaixo.
+
+### 1. Instalação do Módulo
 1. Vá até a **raiz** da instalação do seu Mapos (onde ficam as pastas `application`, `assets`, etc).
 2. Verifique se existe uma pasta chamada `modulos`. **Se não existir, crie-a.**
 3. Copie a pasta `orcamentos` inteira para dentro dessa pasta `modulos`.
@@ -74,22 +109,28 @@ Se você preferir fazer tudo manualmente ou se o instalador automático falhar:
 
 Este módulo utiliza a biblioteca **DomPDF** para gerar os arquivos PDF. É necessário instalá-la via Composer.
 
+> **⚠️ Importante:** Caso estas dependências não sejam instaladas, **não será possível baixar orçamentos nem relatórios em PDF**. 
+
 ### Instalação Automática (Recomendada)
 Este módulo possui seu próprio gerenciador de dependências para garantir isolamento total.
 
 1. Navegue até a pasta do módulo via terminal:
    `cd seusistema/modulos/orcamentos`
 2. Execute o comando para instalar as dependências locais:
+
+> **⚠️ Atenção:** presisa ter o composer instalado para executar este comando.
+
 ```bash
 composer install
 ```
+
 Isso criará a pasta `vendor` **dentro do módulo**, garantindo que ele funcione independentemente das bibliotecas do Mapos principal.
 
 ### Instalação Manual (Sem Composer)
 Caso não possa usar o Composer, você precisará baixar a biblioteca manualmente:
 1. Baixe o release mais recente em [DomPDF Releases](https://github.com/dompdf/dompdf/releases).
-2. Extraia o conteúdo e coloque em uma pasta acessível.
-3. Você precisará ajustar o `require '../vendor/autoload.php';` no arquivo `gerar_pdf.php` para apontar para o local onde você salvou a biblioteca.
+2. Extraia o conteúdo a pasta `vendor` dentro do módulo `orcamentos`.
+3. devera ficar assim: `seusistema/modulos/orcamentos/vendor`.
 
 ## 🔗 Integração no Menu (Opcional)
 
@@ -123,13 +164,14 @@ Após instalar o módulo, você pode ativar os recursos de IA para auxiliar na p
 
 ### 🔑 Configurando a IA (Passo a Passo)
 
-Para utilizar os recursos de inteligência artificial, você precisará de uma chave de API do Google Gemini. É gratuito (com limites generosos) e fácil de obter.
+Para utilizar os recursos de inteligência artificial, você precisará de uma chave de API do Google Gemini. É gratuito (com limite de uso) e fácil e poderar obter mais de uma chave.
 
 #### 1. Obtendo a Chave de API
 1.  Acesse o [Google AI Studio](https://aistudio.google.com/app/apikey).
 2.  Faça login com sua conta Google.
 3.  Clique no botão **"Create API key"**.
-4.  Copie o código gerado (começa com `AIza...`).
+4.  Crie um nome para a chave e selecione a opção **"Escolha um projeto importado"** depois selecione o projeto que desejar ou crie um novo projeto.
+5. depois de criar a chave Copie o código gerado (começa com `AIza...`).
 
 #### 2. Configurando no Sistema
 1.  Vá até a pasta do módulo: `modulos/orcamentos/orcamentos/`.
@@ -137,17 +179,19 @@ Para utilizar os recursos de inteligência artificial, você precisará de uma c
 3.  Localize a linha que define as chaves:
     ```php
     define('GEMINI_API_KEYS', [
-        'COLE_SUA_CHAVE_AQUI',
+        'COLE_SUA_CHAVE1_AQUI',
+        'COLE_SUA_CHAVE2_AQUI',
     ]);
     ```
 4.  Cole a chave que você copiou do Google. Salve o arquivo.
+atenção: você pode adicionar mais de uma chave para evitar bloqueios por limite de uso basta copiar a chave e colar abaixo da primeira chave como no exemplo acima.
 
 #### 3. Ativando/Desativando a IA
 No mesmo arquivo `config_ia.php`, você encontrará a opção:
 ```php
 define('IA_ENABLED', true); // true = Ativado | false = Desativado
 ```
-Se precisar desabilitar os recursos de IA temporariamente, basta mudar para `false`.
+por padrão esta opção esta desativada, caso queira ativar a IA basta mudar para `true` nao esqueça de adicionar a chave de API.
 
 ## 💾 Backup e Segurança
 
@@ -173,6 +217,7 @@ Se você alterar o nome da pasta principal do projeto (ex: de `mapos` para `os`)
 // ...
 
 // 🛑 AQUI: Se a pasta do seu projeto mudou, altere '/mapos/' para o novo nome (ex: '/os/')
+// 💡 DICA: Se o sistema estiver na RAIZ do domínio, use apenas '/'
 define('MAPOS_URL', $protocol . $host . '/mapos/'); 
 
 // ...
@@ -185,6 +230,9 @@ As outras constantes (`MAPOS_PATH` e `MAPOS_ROOT_PATH`) utilizam caminhos relati
 A URL pública (`MAPOS_URL`), no entanto, depende de como o servidor web (Apache/Nginx) enxerga sua pasta, por isso precisa ser definida manualmente se fugir do padrão `/mapos/`.
 
 ---
+
+
+
 
 ## 📜 Licença e Isenção de Responsabilidade
 
