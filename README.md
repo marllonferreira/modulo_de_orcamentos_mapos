@@ -4,6 +4,7 @@
 ![Mapos Compatible](https://img.shields.io/badge/Mapos-Compatible-green?style=flat-square&logo=codeigniter)
 ![License](https://img.shields.io/badge/license-MIT-orange?style=flat-square)
 ![Status](https://img.shields.io/badge/status-active-success?style=flat-square)
+[![GitHub Repo](https://img.shields.io/badge/github-repo-black?style=flat-square&logo=github)](https://github.com/marllonferreira/modulo_orcamentos)
 
 Este é um módulo de gestão de orçamentos projetado para funcionar de forma **independente** dentro do ecossistema Mapos.
 
@@ -80,11 +81,18 @@ Antes de instalar este módulo, você precisa ter o **Mapos** rodando. Se ainda 
 3.  Com o Mapos funcionado, prossiga abaixo.
 
 ### 1. Instalação do Módulo
-1. Vá até a **raiz** da instalação do seu Mapos (onde ficam as pastas `application`, `assets`, etc).
-2. Verifique se existe uma pasta chamada `modulos`. **Se não existir, crie-a.**
-3. Copie a pasta `orcamentos` inteira para dentro dessa pasta `modulos`.
 
-O caminho final deve ficar assim:  
+1.  **Baixe o arquivo:** Faça o download do arquivo ZIP do repositório (ex: `modulo_orcamentos-main.zip`).
+2.  **Descompacte:** Extraia o conteúdo do arquivo ZIP.
+3.  **Renomeie a pasta:** A pasta extraída terá o nome `modulo_orcamentos-main`. **Renomeie esta pasta para apenas `orcamentos`.**
+    *   ❌ Incorreto: `modulos/modulo_orcamentos-main`
+    *   ✅ Correto: `modulos/orcamentos`
+4.  **Mova para o Mapos:**
+    *   Vá até a pasta raiz do seu Mapos.
+    *   Entre na pasta `modulos` (se não existir, crie uma).
+    *   Cole a pasta `orcamentos` lá dentro.
+
+**O caminho final deve ficar exatamente assim:**
 `seusistema / modulos / orcamentos`
 
 ### 2. Como Acessar (Importante ⚠️)
